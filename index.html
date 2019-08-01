@@ -27,12 +27,9 @@
     </div>
 
     <style>
-    
-    .buttons {
-        text-align: center;
-    }
-    
-    
+        .buttons {
+            text-align: center;
+        }
     </style>
 
 
@@ -48,13 +45,36 @@
         crossorigin="anonymous"></script>
     <!--Javascript file-->
     <script type="text/javascript">
+
         //adding array of topics
         var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
 
-        $( ".Cats" ).click(function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+//NOTES//
+//for loop to grab from topics array and display as buttons on page (using bootstrap instead)
+//<div id = "buttons"> </div>
+//for (var i = 0; i < topics.length; i++) {
+ //   var buttons = $('<button>' + topics[i] + '</button>')
+ //   buttons.appendTo('#buttons');}
+
+//to grab an API URL use: "https://api.giphy.com/v1/gifs/search?q=cats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10"
+
+//upon click, call API images from GIPHY and display to page
 
 
     </script>
@@ -66,3 +86,5 @@
 </body>
 
 </html>
+
+
