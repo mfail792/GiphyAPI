@@ -26,6 +26,12 @@
         </div>
     </div>
 
+    <div id="output">
+        <p2>
+
+        </p2>
+    </div>
+
     <style>
         .buttons {
             text-align: center;
@@ -43,11 +49,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
     <!--Javascript file-->
     <script type="text/javascript">
 
         //adding array of topics
         var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+        var x = topics.length;
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=cats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+
+        //console logging the topics array loop
+        for (var i = 0; i < topics.length; i++) {
+            console.log(topics[i]);
+        }
 
 
 
@@ -74,7 +88,8 @@
 
 //to grab an API URL use: "https://api.giphy.com/v1/gifs/search?q=cats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10"
 
-//upon click, call API images from GIPHY and display to page
+// id #output is where images should go.  It is a <p2>
+
 
 
     </script>
@@ -86,5 +101,3 @@
 </body>
 
 </html>
-
-
