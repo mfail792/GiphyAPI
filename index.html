@@ -27,7 +27,7 @@
     </div>
 
 
-    <input type="submit" class="btn btn-primary searchButton black-background green" value="Add!" />
+    <input type="submit" class="btn btn-primary searchButton black-background green" value="Search!" />
 
     <div id="searchIt">
         <input type="text" />
@@ -105,11 +105,35 @@ the random 10 images it pulls already ammend to newImg -->
 
 
 
-        //takes user input from textbox and applies a button to the page
-        $("searchButton").on("click", function () {
-        var random = $(this).attr("searchIt");
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        //**takes user input from textbox and applies GIPHY's to the page accordingly
+        $(".searchButton").on("click", function () {
+
+            //clears any GIFS still on page
+            Reset();
+
+            //grabs user input from textbox
+            var random = $(this).attr("#searchIt");
+            //does an AJAX call based on user input
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
                 random + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+
+            $.ajax({ url: queryURL, method: 'GET' }).done(function (response) {
+                // This is the API response data. It's a JSON object of 10 gifs
+                console.log(response.data);
+
+                for (var i = 0; i < response.data.length; i++) {
+                    var giphyURL = response.data[i].images.fixed_height.url;
+                    var newImg = $("<img>");
+                    newImg.attr("src", giphyURL);
+                    $("#output").append(newImg);
+                }
+
+
+            });
+
+            // need code here display GIFS from user input search
+
+
         });
 
         //console logging the topics array loop
