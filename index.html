@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 
 <head>
     <meta charset="UTF-8">
@@ -35,7 +35,6 @@ the random 10 images it pulls already ammend to newImg -->
     <section>
 
         <div id="output">
-            <img id="output">
         </div>
 
     </section>
@@ -70,15 +69,15 @@ the random 10 images it pulls already ammend to newImg -->
         var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
         var x = topics.length;
         var catURL = "https://api.giphy.com/v1/gifs/search?q=cats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
-        var dogURL
-        var goatURL
-        var cowURL
-        var owlURL
-        var penguinURL
-        var sheepURL
-        var deerURL
-        var otterURL
-        var lobsterURL
+        var dogURL = "https://api.giphy.com/v1/gifs/search?q=dogs&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var goatURL = "https://api.giphy.com/v1/gifs/search?q=goats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var cowURL = "https://api.giphy.com/v1/gifs/search?q=cows&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var owlURL = "https://api.giphy.com/v1/gifs/search?q=owls&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var penguinURL = "https://api.giphy.com/v1/gifs/search?q=penguins&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var sheepURL = "https://api.giphy.com/v1/gifs/search?q=sheep&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var deerURL = "https://api.giphy.com/v1/gifs/search?q=deer&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var otterURL = "https://api.giphy.com/v1/gifs/search?q=otters&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        var lobsterURL = "https://api.giphy.com/v1/gifs/search?q=lobsters&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
 
         //console logging the topics array loop
         for (var i = 0; i < topics.length; i++) {
@@ -102,183 +101,164 @@ the random 10 images it pulls already ammend to newImg -->
                     }
                 })
 
+            });
+
+            $('.Dogs').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: dogURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Goats').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: goatURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Cows').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: cowURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Owls').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: owlURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Penguins').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: penguinURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Sheep').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: sheepURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Deer').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: deerURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+                })
+
+            });
+
+            $('.Otters').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: otterURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                    }
+
+                })
+            });
+
+            $('.Lobsters').on('click', function () {
+                //API call to get GIPHY request
+                $.ajax({ url: lobsterURL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+
+                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        //if not working - try PREPEND or example from AJAXCALLBUTTON.html
+                        $("#output").append(newImg);
+                    }
+
                 });
 
-                $('.Dogs').on('click', function () {
-                    //API call to get GIPHY request
-                    $.ajax({ url: dogURL, method: 'GET' }).done(function (response) {
-                        // This is the API response data. It's a JSON object of 10 gifs
-                        console.log(response.data);
+            }
 
-                        //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                        for (var i = 0; i < response.data.length; i++) {
-                            var giphyURL = response.data[i].images.fixed_height.url;
-                            var newImg = $("<img>");
-                            newImg.attr("src", giphyURL);
-                            $("#output").append(newImg);
-                        }
-                    })
-
-                    });
-
-                    $('.Cows').on('click', function () {
-                        //API call to get GIPHY request
-                        $.ajax({ url: cowURL, method: 'GET' }).done(function (response) {
-                            // This is the API response data. It's a JSON object of 10 gifs
-                            console.log(response.data);
-
-                            //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                            for (var i = 0; i < response.data.length; i++) {
-                                var giphyURL = response.data[i].images.fixed_height.url;
-                                var newImg = $("<img>");
-                                newImg.attr("src", giphyURL);
-                                $("#output").append(newImg);
-                            }
-                        })
-
-                        });
-
-                        $('.Owls').on('click', function () {
-                            //API call to get GIPHY request
-                            $.ajax({ url: owlURL, method: 'GET' }).done(function (response) {
-                                // This is the API response data. It's a JSON object of 10 gifs
-                                console.log(response.data);
-
-                                //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                for (var i = 0; i < response.data.length; i++) {
-                                    var giphyURL = response.data[i].images.fixed_height.url;
-                                    var newImg = $("<img>");
-                                    newImg.attr("src", giphyURL);
-                                    $("#output").append(newImg);
-                                }
-                            })
-
-                            });
-
-                            $('.Penguins').on('click', function () {
-                                //API call to get GIPHY request
-                                $.ajax({ url: penguinURL, method: 'GET' }).done(function (response) {
-                                    // This is the API response data. It's a JSON object of 10 gifs
-                                    console.log(response.data);
-
-                                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                    for (var i = 0; i < response.data.length; i++) {
-                                        var giphyURL = response.data[i].images.fixed_height.url;
-                                        var newImg = $("<img>");
-                                        newImg.attr("src", giphyURL);
-                                        $("#output").append(newImg);
-                                    }
-                                })
-
-                                });
-
-                                $('.Sheep').on('click', function () {
-                                    //API call to get GIPHY request
-                                    $.ajax({ url: sheepURL, method: 'GET' }).done(function (response) {
-                                        // This is the API response data. It's a JSON object of 10 gifs
-                                        console.log(response.data);
-
-                                        //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                        for (var i = 0; i < response.data.length; i++) {
-                                            var giphyURL = response.data[i].images.fixed_height.url;
-                                            var newImg = $("<img>");
-                                            newImg.attr("src", giphyURL);
-                                            $("#output").append(newImg);
-                                        }
-                                    })
-
-                                    });
-
-                                    $('.Deer').on('click', function () {
-                                        //API call to get GIPHY request
-                                        $.ajax({ url: deerURL, method: 'GET' }).done(function (response) {
-                                            // This is the API response data. It's a JSON object of 10 gifs
-                                            console.log(response.data);
-
-                                            //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                            for (var i = 0; i < response.data.length; i++) {
-                                                var giphyURL = response.data[i].images.fixed_height.url;
-                                                var newImg = $("<img>");
-                                                newImg.attr("src", giphyURL);
-                                                $("#output").append(newImg);
-                                            }
-                                        })
-
-                                        });
-
-                                        $('.Otters').on('click', function () {
-                                            //API call to get GIPHY request
-                                            $.ajax({ url: otterURL, method: 'GET' }).done(function (response) {
-                                                // This is the API response data. It's a JSON object of 10 gifs
-                                                console.log(response.data);
-
-                                                //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                                for (var i = 0; i < response.data.length; i++) {
-                                                    var giphyURL = response.data[i].images.fixed_height.url;
-                                                    var newImg = $("<img>");
-                                                    newImg.attr("src", giphyURL);
-                                                    $("#output").append(newImg);
-                                                }
-
-                                            })
-                                        });
-
-                                            $('.Lobsters').on('click', function () {
-                                                //API call to get GIPHY request
-                                                $.ajax({ url: lobsterURL, method: 'GET' }).done(function (response) {
-                                                    // This is the API response data. It's a JSON object of 10 gifs
-                                                    console.log(response.data);
-
-                                                    //creating a loop to grab images from API call above and append to newly (dynamic) created image area on page
-                                                    for (var i = 0; i < response.data.length; i++) {
-                                                        var giphyURL = response.data[i].images.fixed_height.url;
-                                                        var newImg = $("<img>");
-                                                        newImg.attr("src", giphyURL);
-                                                        $("#output").append(newImg);
-                                                    }
-
-                                                });
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//NOTES//
-
-//**still need to write code (probably a function) to clear #output display when new button is clicked so new images will appear where
-//previous ones were displayed. 
-// Maybe put at end of each click event to clear it?... Reset ();**
-
-//for loop to grab from topics array and display as buttons on page (using bootstrap instead)
-//<div id = "buttons"> </div>
-//for (var i = 0; i < topics.length; i++) {
-//   var buttons = $('<button>' + topics[i] + '</button>')
-//   buttons.appendTo('#buttons');}
-
-//to grab an API URL use: "https://api.giphy.com/v1/gifs/search?q=cats&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10"
-
-// id #output is where images should go.  It is a <img>
-
-
+        //ERROR!! html validator
 
 
     </script>
