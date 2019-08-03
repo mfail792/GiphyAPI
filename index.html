@@ -27,6 +27,13 @@
     </div>
 
 
+    <input type="submit" class="btn btn-primary searchButton black-background green" value="Add!" />
+
+    <div id="searchIt">
+        <input type="text" />
+    </div>
+
+
     <!-- IMAGE DISPLAY AREA  
   
 Thought: Could try adding class rows with designated ID's for EACH array topic (ammend to #output 
@@ -47,6 +54,23 @@ the random 10 images it pulls already ammend to newImg -->
 
         .section {
             text-align: center;
+        }
+
+        .searchButton {
+            margin-left: 40%;
+            display: flex;
+            position: absolute;
+            bottom: 150px;
+
+        }
+
+        #searchIt {
+            margin-left: 36%;
+            display: flex;
+            position: absolute;
+            bottom: 190px;
+            border: 2px solid black;
+            border-radius: 4px;
         }
     </style>
 
@@ -79,13 +103,25 @@ the random 10 images it pulls already ammend to newImg -->
         var otterURL = "https://api.giphy.com/v1/gifs/search?q=otters&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
         var lobsterURL = "https://api.giphy.com/v1/gifs/search?q=lobsters&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
 
+
+
+        //takes user input from textbox and applies a button to the page
+        $("searchButton").on("click", function () {
+        var random = $(this).attr("searchIt");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                random + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+        });
+
         //console logging the topics array loop
         for (var i = 0; i < topics.length; i++) {
             console.log(topics[i]);
         }
 
-        //need to come up with a solution to clear previous GIFS upon new button click... 
-        //if a new button is clicked, replace currently displayed images with new images from clicked button.
+
+        //need to add search field and button, where each entry adds corresponding AJAX button that will call GIPHY's upon click
+
+
+
         //add the Reset() at the beginning of each click listener event so it checks it before going further  
         function Reset() {
             $("#output").empty();
@@ -95,6 +131,8 @@ the random 10 images it pulls already ammend to newImg -->
         //**need to make a function here for each button that includes click command to signal start of AJAX event below**
         $('.Cats').on('click', function () {
             Reset();
+
+
             //API call to get GIPHY request
             $.ajax({ url: catURL, method: 'GET' }).done(function (response) {
                 // This is the API response data. It's a JSON object of 10 gifs
@@ -106,6 +144,8 @@ the random 10 images it pulls already ammend to newImg -->
                     var newImg = $("<img>");
                     newImg.attr("src", giphyURL);
                     $("#output").append(newImg);
+
+
                 }
             })
 
@@ -269,13 +309,14 @@ the random 10 images it pulls already ammend to newImg -->
                     newImg.attr("src", giphyURL);
                     //if not working - try PREPEND or example from AJAXCALLBUTTON.html
                     $("#output").append(newImg);
+
                 }
 
             });
 
         });
 
-        //ERROR!! html validator
+
 
 
     </script>
