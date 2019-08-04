@@ -19,7 +19,7 @@
 
 
     <div id="searchButton">
-        <input type="submit" class="btn btn-primary black-background green" value="Search!" />
+        <input type="submit" class="btn btn-primary black-background green" value="Add Me!" />
     </div>
 
 
@@ -53,6 +53,12 @@ the random 10 images it pulls already ammend to newImg -->
             text-align: center;
         }
 
+        body {
+            width: 100%;
+            background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/lilypads.png");
+        }
+
+
         #searchButton {
             margin-left: 40%;
             display: flex;
@@ -61,7 +67,7 @@ the random 10 images it pulls already ammend to newImg -->
         }
 
         #searchIt {
-            margin-left: 36.5%;
+            margin-left: 37%;
             display: flex;
             position: absolute;
             bottom: 190px;
@@ -86,85 +92,78 @@ the random 10 images it pulls already ammend to newImg -->
     <script type="text/javascript">
 
 
-$( document ).ready(function() {
+        $(document).ready(function () {
 
-        //adding array of topics.  NEED TO FINISH WEB ADDRESSES BELOW (JUST LIKE CATURL)
-        var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
-        var x = topics.length;
-
-
-        //clears images on page
-        function Reset() {
-            $("#output").empty();
-        }
+            //adding array of topics. 
+            var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+            var x = topics.length;
 
 
-
-
-        //**takes user input from textbox and applies GIPHY's to the page accordingly** running into an issue here...
-        $("#searchButton").on('click', function () {
-            console.log("step1");
-            //clears any GIFS still on page
-            Reset();
-            var random = $("#searchIt").val().trim();
-            console.log(random);
-            //does an AJAX call based on user input
-            var userBtn = $("<button>");
-            userBtn.val(random);
-            userBtn.text(random);
-            userBtn.addClass("animalClass");
-            $(".buttons").append(userBtn);
-
-
-
-
-
-
-        });
-        //console logging the topics array loop
-        for (var i = 0; i < topics.length; i++) {
-            var animal = $("<button>");
-            animal.val(topics[i]);
-            animal.text(topics[i]);
-            animal.addClass("animalClass");
-            $(".buttons").append(animal);
-
-
-
-            console.log(topics[i]);
-        }
-
-        //functions here for each button that includes click command to signal start of AJAX event
-        $('.animalClass').on('click', function () {
-
-            Reset();
-            var searchQuery = $(this).val().trim();
-            console.log(searchQuery);
-            var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
-
-
-            //API call to get GIPHY request
-            $.ajax({ url: URL, method: 'GET' }).done(function (response) {
-                // This is the API response data. It's a JSON object of 10 gifs
-                console.log(response.data);
-                //creating a loop to grab images from API call above and append to newly created image area on page
-                for (var i = 0; i < response.data.length; i++) {
-                    var giphyURL = response.data[i].images.fixed_height.url;
-                    var newImg = $("<img>");
-                    newImg.attr("src", giphyURL);
-                    $("#output").append(newImg);
-
-
-                    //RATING
-                    var rating = response.data[i].rating;
-                    var p = $('<p>').text('Rating: ' + rating);
-                }
-
+            //clears images on page
+            function Reset() {
+                $("#output").empty();
             }
-            );
-        });
 
-})
+
+
+
+            //**takes user input from textbox and applies GIPHY's to the page accordingly**
+            $("#searchButton").on('click', function () {
+                console.log("step1");
+                //clears any GIFS still on page
+                Reset();
+                var random = $("#searchIt").val().trim();
+                console.log(random);
+                //does an AJAX call based on user input, outputs as button onto screen as part of 'animalClass' class
+                var userBtn = $("<button>");
+                userBtn.val(random);
+                userBtn.text(random);
+                userBtn.addClass("animalClass");
+                $(".buttons").append(userBtn);
+
+
+
+            });
+            //console logging the topics array loop, making new class for animal buttons
+            for (var i = 0; i < topics.length; i++) {
+                var animal = $("<button>");
+                animal.val(topics[i]);
+                animal.text(topics[i]);
+                animal.addClass("animalClass");
+                $(".buttons").append(animal);
+
+
+
+                console.log(topics[i]);
+            }
+
+            //functions here for each button that includes click command to signal start of AJAX event
+            $('.animalClass').on('click', function () {
+
+                Reset();
+                var searchQuery = $(this).val().trim();
+                console.log(searchQuery);
+                var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+
+
+                //API call to get GIPHY request
+                $.ajax({ url: URL, method: 'GET' }).done(function (response) {
+                    // This is the API response data. It's a JSON object of 10 gifs
+                    console.log(response.data);
+                    //creating a loop to grab images from API call above and append to newly created image area on page
+                    for (var i = 0; i < response.data.length; i++) {
+                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var newImg = $("<img>");
+                        newImg.attr("src", giphyURL);
+                        $("#output").append(newImg);
+                      
+                    }
+
+                }
+                );
+            });
+
+        })
     </script>
 
 
