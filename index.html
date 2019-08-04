@@ -18,9 +18,9 @@
     </div>
 
 
-    <div id="searchButton">
-        <input type="submit" class="btn btn-primary black-background green" value="Add Me!" />
-    </div>
+
+    <input id="searchButton" type="submit" class="btn btn-primary black-background green" value="Add Me!" />
+
 
 
     <input id="searchIt" type="text" />
@@ -94,9 +94,10 @@ the random 10 images it pulls already ammend to newImg -->
 
         $(document).ready(function () {
 
-            //adding array of topics. 
-            var topics = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+            //adding array of topics
+            var topics = [];
             var x = topics.length;
+
 
 
             //clears images on page
@@ -104,6 +105,17 @@ the random 10 images it pulls already ammend to newImg -->
                 $("#output").empty();
             }
 
+            function runIt() {
+                for (var i = 0; i < topics.length; i++) {
+
+                    var animal = $("<button>");
+                    animal.val(topics[i]);
+                    animal.text(topics[i]);
+                    animal.addClass("animalClass");
+                    $(".buttons").append(animal);
+
+                }
+            }
 
 
 
@@ -111,54 +123,49 @@ the random 10 images it pulls already ammend to newImg -->
             $("#searchButton").on('click', function () {
                 console.log("step1");
                 //clears any GIFS still on page
-                Reset();
+               
                 var random = $("#searchIt").val().trim();
-                console.log(random);
-                //does an AJAX call based on user input, outputs as button onto screen as part of 'animalClass' class
+
+                //outputs as button onto screen as part of 'animalClass' class
                 var userBtn = $("<button>");
                 userBtn.val(random);
                 userBtn.text(random);
                 userBtn.addClass("animalClass");
                 $(".buttons").append(userBtn);
+                runIt();
 
 
 
-            });
-            //console logging the topics array loop, making new class for animal buttons
-            for (var i = 0; i < topics.length; i++) {
-                var animal = $("<button>");
-                animal.val(topics[i]);
-                animal.text(topics[i]);
-                animal.addClass("animalClass");
-                $(".buttons").append(animal);
 
 
 
-                console.log(topics[i]);
-            }
-
-            //functions here for each button that includes click command to signal start of AJAX event
-            $('.animalClass').on('click', function () {
-
-                Reset();
-                var searchQuery = $(this).val().trim();
-                console.log(searchQuery);
-                var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+                //looping through array, adding buttons to top of page at load
 
 
-                //API call to get GIPHY request
-                $.ajax({ url: URL, method: 'GET' }).done(function (response) {
-                    // This is the API response data. It's a JSON object of 10 gifs
-                    console.log(response.data);
-                    //creating a loop to grab images from API call above and append to newly created image area on page
-                    for (var i = 0; i < response.data.length; i++) {
-                        var giphyURL = response.data[i].images.fixed_height.url;
-                        var newImg = $("<img>");
-                        newImg.attr("src", giphyURL);
-                        $("#output").append(newImg);
-                      
-                    }
+                //functions here for each button that includes click command to signal start of AJAX event..
+                //currently not displaying GIF for user added button, which still falls under...
+                $('.animalClass').on('click', function () {
 
+                    Reset();
+                    var searchQuery = $(this).val().trim();
+
+                    console.log(searchQuery);
+                    var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
+
+
+                    //API call to get GIPHY request
+                    $.ajax({ url: URL, method: 'GET' }).done(function (response) {
+                        // This is the API response data. It's a JSON object of 10 gifs
+                        console.log(response.data);
+                        //creating a loop to grab images from API call above and append to newly created image area on page
+                        for (var i = 0; i < response.data.length; i++) {
+                            var giphyURL = response.data[i].images.fixed_height.url;
+                            var newImg = $("<img>");
+                            newImg.attr("src", giphyURL);
+                            $("#output").append(newImg);
+
+                        }
+                    });
                 }
                 );
             });
