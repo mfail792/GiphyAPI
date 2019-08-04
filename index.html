@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>GIPHY Assignment</title>
+    <title>GIF Master</title>
 </head>
 
 <body>
@@ -28,9 +28,7 @@
 
     <!-- IMAGE DISPLAY AREA  
   
-Thought: Could try adding class rows with designated ID's for EACH array topic (ammend to #output 
-at end of for loop), so they have a nice place to layout on the page... Updated thought: wouldn't work because
-the random 10 images it pulls already ammend to newImg -->
+STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
 
     <section>
 
@@ -104,7 +102,27 @@ the random 10 images it pulls already ammend to newImg -->
     <script type="text/javascript">
 
 
+
         $(document).ready(function () {
+            alert("Welcome, GIF MASTER!  Start adding animals below!");
+
+
+            var animales = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+            
+
+            for (var i = 0; i < animales.length; i++) {
+
+                var animal = $("<button>");
+                animal.val(animales[i]);
+                animal.text(animales[i]);
+                animal.addClass("animalClass");
+                $(".buttons").append(animal);
+                
+
+            }
+
+
+
 
 
             //adding array of topics
@@ -123,7 +141,7 @@ the random 10 images it pulls already ammend to newImg -->
             });
 
 
-
+            //adds user generated button to array
             function runIt() {
                 for (var i = 0; i < topics.length; i++) {
 
@@ -156,18 +174,20 @@ the random 10 images it pulls already ammend to newImg -->
 
 
 
-
-
-
                 //looping through array, adding buttons to top of page at load
 
 
                 //functions here for each button that includes click command to signal start of AJAX event..
                 //currently not displaying GIF for user added button, which still falls under...
+
                 $('.animalClass').on('click', function () {
 
                     Reset();
+
+
                     var searchQuery = $(this).val().trim();
+
+
 
                     console.log(searchQuery);
                     var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
@@ -183,6 +203,7 @@ the random 10 images it pulls already ammend to newImg -->
                             var newImg = $("<img>");
                             newImg.attr("src", giphyURL);
                             $("#output").append(newImg);
+
 
                         }
                     });
