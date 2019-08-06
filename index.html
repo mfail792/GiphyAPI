@@ -104,12 +104,14 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
     <script type="text/javascript">
 
 
-
         $(document).ready(function () {
             alert("Welcome, GIF MASTER!  Start adding animals below!");
 
 
             var animales = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+
+
+
             for (var i = 0; i < animales.length; i++) {
 
                 var animal = $("<button>");
@@ -174,23 +176,13 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
 
 
 
-            //START AND STOP THE GIFS
-
-            $(document).on('click', '#output', function () {
-
-                var state = $(this).attr("data-state");
-
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
-                    $(this).attr("src", $(this).attr("data-still"));
-                    $(this).attr("data-state", "still");
-                }
-            });
 
 
-            //looping through array, adding buttons to top of page at load
+
+
+
+
+
 
 
             //functions here for each button that includes click command to signal start of AJAX event..
@@ -205,6 +197,7 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                 var searchQuery = $(this).val().trim();
 
 
+
                 console.log(searchQuery);
                 var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
 
@@ -213,15 +206,18 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                 $.ajax({ url: URL, method: 'GET' }).done(function (response) {
 
 
+
                     // This is the API response data. It's a JSON object of 10 gifs
                     console.log(response.data);
                     //creating a loop to grab images from API call above and append to newly created image area on page
                     for (var i = 0; i < response.data.length; i++) {
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
-                        var newImg = $("<img>");
-                        $("#output").append(newImg);
 
+                        var newImg = $("<img>");
+                        newImg.addClass('clicking');
+                        $("#output").append(newImg);
+                        
 
                         newImg.attr('src', still);
                         newImg.attr('data-still', still);
@@ -229,7 +225,20 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                         newImg.attr('data-state', 'still');
 
 
+                        //START AND STOP THE GIFS.  In console, it switches between animated and still on the DIV level, but doesn't do anything...
 
+                        $('.clicking').on('click', function () {
+
+                            var state = $(this).attr("data-state");
+                            if (state === "still") {
+                                $(this).attr("src", $(this).attr("data-animate"));
+                                $(this).attr("data-state", "animate");
+                            } else {
+                                $(this).attr("src", $(this).attr("data-still"));
+                                $(this).attr("data-state", "still");
+
+                            }
+                        })
 
 
                         // If the clicked image's state is still, update its src attribute to what its data-animate value is.
