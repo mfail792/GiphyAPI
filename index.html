@@ -175,6 +175,17 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             });
 
 
+            $(document).on("click", ".clicking", function() {
+                var state = $(this).attr("data-state");
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+
+                }
+            })
 
 
 
@@ -214,31 +225,20 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
 
+                        
                         var newImg = $("<img>");
                         newImg.addClass('clicking');
                         $("#output").append(newImg);
-                        
+
 
                         newImg.attr('src', still);
                         newImg.attr('data-still', still);
-                        newImg.attr('data-animated', animated);
+                        newImg.attr('data-animate', animated);
                         newImg.attr('data-state', 'still');
 
 
                         //START AND STOP THE GIFS.  In console, it switches between animated and still on the DIV level, but doesn't do anything...
 
-                        $('.clicking').on('click', function () {
-
-                            var state = $(this).attr("data-state");
-                            if (state === "still") {
-                                $(this).attr("src", $(this).attr("data-animate"));
-                                $(this).attr("data-state", "animate");
-                            } else {
-                                $(this).attr("src", $(this).attr("data-still"));
-                                $(this).attr("data-state", "still");
-
-                            }
-                        })
 
 
                         // If the clicked image's state is still, update its src attribute to what its data-animate value is.
