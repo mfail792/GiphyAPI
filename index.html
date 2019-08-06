@@ -8,6 +8,7 @@
 
 <body>
 
+
     <!-- placing all buttons into a container/row to help organize -->
     <div class="container-fluid">
         <div class="row">
@@ -121,9 +122,6 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             }
 
 
-
-
-
             //adding array of topics
             var topics = [];
 
@@ -173,6 +171,25 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
 
 
             });
+
+
+
+            //START AND STOP THE GIFS
+
+            $(document).on('click', '#output', function () {
+
+                var state = $(this).attr("data-state");
+
+                if (state === "still") {
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                } else {
+                    $(this).attr("src", $(this).attr("data-still"));
+                    $(this).attr("data-state", "still");
+                }
+            });
+
+
             //looping through array, adding buttons to top of page at load
 
 
@@ -194,16 +211,32 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
 
                 //API call to get GIPHY request
                 $.ajax({ url: URL, method: 'GET' }).done(function (response) {
-                    Reset();
+
 
                     // This is the API response data. It's a JSON object of 10 gifs
                     console.log(response.data);
                     //creating a loop to grab images from API call above and append to newly created image area on page
                     for (var i = 0; i < response.data.length; i++) {
-                        var giphyURL = response.data[i].images.fixed_height.url;
+                        var animated = response.data[i].images.fixed_height.url;
+                        var still = response.data[i].images.fixed_height_still.url;
                         var newImg = $("<img>");
-                        newImg.attr("src", giphyURL);
                         $("#output").append(newImg);
+
+
+                        newImg.attr('src', still);
+                        newImg.attr('data-still', still);
+                        newImg.attr('data-animated', animated);
+                        newImg.attr('data-state', 'still');
+
+
+
+
+
+                        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                        // Then, set the image's data-state to animate
+
+
+
 
                     }
                 });
