@@ -28,10 +28,6 @@
 
 
 
-    <!-- IMAGE DISPLAY AREA  
-  
-STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
-
     <section>
 
         <div id="rating">
@@ -77,6 +73,9 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             position: absolute;
             bottom: 150px;
         }
+
+       
+       
 
         #searchIt {
             margin-left: 37%;
@@ -135,6 +134,7 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                 $("#output").empty();
             }
 
+            //Funtion to clear page from click
             $(".clearme").on('click', function () {
                 Reset();
             });
@@ -175,6 +175,7 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             });
 
 
+            //START AND STOP THE GIFS 
             $(document).on("click", ".clicking", function () {
                 var state = $(this).attr("data-state");
                 if (state === "still") {
@@ -188,24 +189,9 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             })
 
 
-            //RATING (work in progress):
-
-            // for(var i=0; i<response.data.length; i++)  {
-            // var rating = response.data[i].rating;
-            // var p = $('<p>').text('Rating: ' +rating);
-            // }
 
 
-
-
-
-
-
-            //functions here for each button that includes click command to signal start of AJAX event..
-            //currently not displaying GIF for user added button, which still falls under...
-
-
-
+            //function here for each button in .animalClass 
             $(document).on('click', '.animalClass', function () {
 
                 Reset();
@@ -225,30 +211,30 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
 
                     // This is the API response data. It's a JSON object of 10 gifs
                     console.log(response.data);
-                    //creating a loop to grab images from API call above and append to newly created image area on page
+                    //creating a loop to grab images from API call (animated and still) above and append to newly created image area on page
                     for (var i = 0; i < response.data.length; i++) {
+
+                     
+                        
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
 
 
                         var newImg = $("<img>");
                         newImg.addClass('clicking');
-                        $("#output").append(newImg);
+                  
+
+                        var rating = response.data[i].rating;
+                        var p = $('<span>').text('Rating: ' + rating);
+
+                        p.append(newImg);
+                        $("#output").append(p);
 
 
                         newImg.attr('src', still);
                         newImg.attr('data-still', still);
                         newImg.attr('data-animate', animated);
                         newImg.attr('data-state', 'still');
-
-
-                        //START AND STOP THE GIFS.  In console, it switches between animated and still on the DIV level, but doesn't do anything...
-
-
-
-                        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                        // Then, set the image's data-state to animate
-
 
 
 
