@@ -175,7 +175,7 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             });
 
 
-            $(document).on("click", ".clicking", function() {
+            $(document).on("click", ".clicking", function () {
                 var state = $(this).attr("data-state");
                 if (state === "still") {
                     $(this).attr("src", $(this).attr("data-animate"));
@@ -188,7 +188,12 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
             })
 
 
+            //RATING (work in progress):
 
+            // for(var i=0; i<response.data.length; i++)  {
+            // var rating = response.data[i].rating;
+            // var p = $('<p>').text('Rating: ' +rating);
+            // }
 
 
 
@@ -225,7 +230,7 @@ STILL NEED TO ADD START STOP/RATING FUNCTIONALITY TO GIFS -->
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
 
-                        
+
                         var newImg = $("<img>");
                         newImg.addClass('clicking');
                         $("#output").append(newImg);
