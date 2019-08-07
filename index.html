@@ -51,13 +51,14 @@
         body {
             width: 100%;
             background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/lilypads.png");
+            text-align: center;
         }
 
         .clearme {
             margin-left: 40%;
             display: flex;
             position: absolute;
-            bottom: 100px;
+            bottom: 25px;
             background: red;
         }
 
@@ -71,17 +72,20 @@
             margin-left: 40%;
             display: flex;
             position: absolute;
-            bottom: 150px;
+            bottom: 75px;
         }
 
-       
-       
+        span {
+            padding-top: 2px;
+        }
+
+
 
         #searchIt {
             margin-left: 37%;
             display: flex;
             position: absolute;
-            bottom: 200px;
+            bottom: 125px;
             border: 2px solid black;
             border-radius: 4px;
         }
@@ -214,21 +218,25 @@
                     //creating a loop to grab images from API call (animated and still) above and append to newly created image area on page
                     for (var i = 0; i < response.data.length; i++) {
 
-                     
-                        
+
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
 
 
                         var newImg = $("<img>");
                         newImg.addClass('clicking');
-                  
+                        var animalss = $("<div style='display:inline-block'>");
+
 
                         var rating = response.data[i].rating;
-                        var p = $('<span>').text('Rating: ' + rating);
+                        var p = $('<p>').text('Rating: ' + rating);
 
-                        p.append(newImg);
-                        $("#output").append(p);
+                        $(animalss).append(p);
+                        $(animalss).append(newImg);
+
+
+                        $("#output").append(animalss);
+
 
 
                         newImg.attr('src', still);
