@@ -170,7 +170,7 @@
 
                 var random = $("#searchIt").val().trim();
 
-                //outputs as button onto screen as part of 'animalClass' class
+                //adds button onto screen as part of 'animalClass' class, executes runIt()
                 var userBtn = $("<button>");
                 userBtn.val(random);
                 userBtn.text(random);
@@ -183,7 +183,7 @@
             });
 
 
-            //START AND STOP THE GIFS 
+            //allow for animation start/stop upon GIF click
             $(document).on("click", ".clicking", function () {
                 var state = $(this).attr("data-state");
                 if (state === "still") {
