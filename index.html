@@ -115,7 +115,7 @@
             alert("Welcome, GIF MASTER!  Start adding animals below!");
 
 
-            var animales = ["Cats", "Dogs", "Goats", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters", "Lobsters"];
+            var animales = ["Cats", "Dogs", "Cows", "Owls", "Penguins", "Sheep", "Deer", "Otters",];
 
 
 
@@ -201,36 +201,23 @@
 
             //function here for each button in .animalClass 
             $(document).on('click', '.animalClass', function () {
-
                 Reset();
-
                 var searchQuery = $(this).val().trim();
-
-
-
                 console.log(searchQuery);
                 var URL = "https://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=WOq3TKvvmWDMU7AkZqBKgeGGx0PodG3e&limit=10";
-
-
                 //API call to get GIPHY request
                 $.ajax({ url: URL, method: 'GET' }).done(function (response) {
-
-
-
                     // This is the API response data. It's a JSON object of 10 gifs
                     console.log(response.data);
                     //creating a loop to grab images from API call (animated and still) above and append to newly created image area on page
                     for (var i = 0; i < response.data.length; i++) {
-
-
                         var animated = response.data[i].images.fixed_height.url;
                         var still = response.data[i].images.fixed_height_still.url;
-
-
+                        
                         var newImg = $("<img>");
+
                         newImg.addClass('clicking');
                         var animalss = $("<div style='display:inline-block'>");
-
 
                         var rating = response.data[i].rating;
                         var p = $('<p>').text('Rating: ' + rating);
